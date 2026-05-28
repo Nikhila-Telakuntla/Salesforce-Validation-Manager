@@ -2,8 +2,9 @@ import React, { useEffect, useState } from "react";
 import "./App.css";
 
 const API_URL =
-  "https://salesforce-validation-manager-7w3c.onrender.com";
-
+window.location.hostname === "localhost"
+  ? "http://localhost:5000"
+  : "https://salesforce-validation-manager-7w3c.onrender.com";
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -53,7 +54,7 @@ function App() {
 
     window.open(
       `${API_URL}/login`,
-      "_self"
+      "_blank"
     );
   };
 
