@@ -12,7 +12,7 @@ app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://localhost:3000",
+    origin: "http://salesforce-validation-manager.netlify.app",
     credentials: true,
   })
 );
@@ -52,7 +52,7 @@ app.get("/oauth2/callback", async (req, res) => {
 
     console.log("Connected to Salesforce");
 
-    res.redirect("http://localhost:3000");
+    res.redirect("http://salesforce-validation-manager.netlify.app");
   } catch (err) {
     console.log(err);
     res.status(500).send("OAuth Error");
