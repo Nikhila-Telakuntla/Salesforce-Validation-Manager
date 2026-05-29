@@ -1,21 +1,17 @@
-
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
 function App() {
 
+  const API_URL =
+    "https://salesforce-validation-manager-a5h6.onrender.com";
+
   const [loggedIn, setLoggedIn] = useState(false);
-
   const [username, setUsername] = useState("");
-
   const [rules, setRules] = useState([]);
-
   const [loading, setLoading] = useState(false);
-
   const [deploying, setDeploying] = useState(false);
-
-  const [successMessage, setSuccessMessage] =
-    useState("");
+  const [successMessage, setSuccessMessage] = useState("");
 
   useEffect(() => {
     checkUser();
@@ -26,7 +22,7 @@ function App() {
     try {
 
       const response = await fetch(
-        "http://https://salesforce-validation-manager-a5h6.onrender.com/oauth2/callback/user",
+        `${API_URL}/user`,
         {
           credentials: "include",
         }
@@ -35,14 +31,11 @@ function App() {
       const data = await response.json();
 
       if (data.loggedIn) {
-
         setLoggedIn(true);
-
         setUsername(data.username);
       }
 
     } catch (err) {
-
       console.log(err);
     }
   };
@@ -50,7 +43,7 @@ function App() {
   const login = () => {
 
     window.open(
-      "http://https://salesforce-validation-manager-a5h6.onrender.com/oauth2/callback/login",
+      `${API_URL}/login`,
       "_self"
     );
   };
@@ -58,18 +51,15 @@ function App() {
   const logout = async () => {
 
     await fetch(
-      "http://https://salesforce-validation-manager-a5h6.onrender.com/oauth2/callback/logout",
+      `${API_URL}/logout`,
       {
         credentials: "include",
       }
     );
 
     setLoggedIn(false);
-
     setUsername("");
-
     setRules([]);
-
     setSuccessMessage("");
   };
 
@@ -80,7 +70,7 @@ function App() {
       setLoading(true);
 
       const response = await fetch(
-        "http://https://salesforce-validation-manager-a5h6.onrender.com/validation-rules",
+        `${API_URL}/validation-rules`,
         {
           credentials: "include",
         }
@@ -135,7 +125,7 @@ function App() {
     try {
 
       const response = await fetch(
-        "http://https://salesforce-validation-manager-a5h6.onrender.com/rollback",
+        `${API_URL}/rollback`,
         {
           credentials: "include",
         }
@@ -166,7 +156,7 @@ function App() {
       setDeploying(true);
 
       await fetch(
-        "http://https://salesforce-validation-manager-a5h6.onrender.com/deploy",
+        `${API_URL}/deploy`,
         {
           method: "POST",
 
