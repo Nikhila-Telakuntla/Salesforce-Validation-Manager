@@ -1,3 +1,4 @@
+
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
@@ -25,7 +26,7 @@ function App() {
     try {
 
       const response = await fetch(
-        "http://localhost:5000/user",
+        "http://https://salesforce-validation-manager-a5h6.onrender.com/oauth2/callback/user",
         {
           credentials: "include",
         }
@@ -49,7 +50,7 @@ function App() {
   const login = () => {
 
     window.open(
-      "http://localhost:5000/login",
+      "http://https://salesforce-validation-manager-a5h6.onrender.com/oauth2/callback/login",
       "_self"
     );
   };
@@ -57,7 +58,7 @@ function App() {
   const logout = async () => {
 
     await fetch(
-      "http://localhost:5000/logout",
+      "http://https://salesforce-validation-manager-a5h6.onrender.com/oauth2/callback/logout",
       {
         credentials: "include",
       }
@@ -79,7 +80,7 @@ function App() {
       setLoading(true);
 
       const response = await fetch(
-        "http://localhost:5000/validation-rules",
+        "http://https://salesforce-validation-manager-a5h6.onrender.com/validation-rules",
         {
           credentials: "include",
         }
@@ -134,7 +135,7 @@ function App() {
     try {
 
       const response = await fetch(
-        "http://localhost:5000/rollback",
+        "http://https://salesforce-validation-manager-a5h6.onrender.com/rollback",
         {
           credentials: "include",
         }
@@ -165,7 +166,7 @@ function App() {
       setDeploying(true);
 
       await fetch(
-        "http://localhost:5000/deploy",
+        "http://https://salesforce-validation-manager-a5h6.onrender.com/deploy",
         {
           method: "POST",
 
