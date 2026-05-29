@@ -7,13 +7,12 @@ const jsforce = require("jsforce");
 dotenv.config();
 
 const app = express();
-app.set("trust proxy", 1);
 
 app.use(express.json());
 
 app.use(
   cors({
-    origin: "http://salesforce-validation-manager.netlify.app",
+    origin: "http://localhost:3000",
     credentials: true,
   })
 );
@@ -22,13 +21,7 @@ app.use(
   session({
     secret: process.env.SESSION_SECRET,
     resave: false,
-    saveUninitialized: false,
-
-    cookie: {
-      secure: true,
-      httpOnly: true,
-      sameSite: "none"
-    }
+    saveUninitialized: true,
   })
 );
 
@@ -59,7 +52,7 @@ app.get("/oauth2/callback", async (req, res) => {
 
     console.log("Connected to Salesforce");
 
-    res.redirect("http://salesforce-validation-manager.netlify.app");
+    res.redirect("http://localhost:3000");
   } catch (err) {
     console.log(err);
     res.status(500).send("OAuth Error");
