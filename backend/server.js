@@ -8,6 +8,8 @@ dotenv.config();
 
 const app = express();
 
+app.set("trust proxy", 1);
+
 app.use(express.json());
 
 app.use(
@@ -20,13 +22,18 @@ app.use(
 app.use(
   session({
     secret: process.env.SESSION_SECRET,
+
     resave: false,
+
     saveUninitialized: false,
+
+    proxy: true,
 
     cookie: {
       secure: true,
       httpOnly: true,
       sameSite: "none",
+      maxAge: 1000 * 60 * 60 * 24,
     },
   })
 );
@@ -63,6 +70,16 @@ app.get("/oauth2/callback", async (req, res) => {
     console.log(err);
     res.status(500).send("OAuth Error");
   }
+});
+
+app.get("/test-session", (req, res) => {
+
+  req.session.test = "working";
+
+  res.json({
+    session: req.session,
+  });
+
 });
 
 app.get("/user", async (req, res) => {
