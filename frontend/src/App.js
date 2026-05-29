@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
 
-const API_URL =
-window.location.hostname === "localhost"
-  ? "http://localhost:5000"
-  : "https://salesforce-validation-manager-7w3c.onrender.com";
 function App() {
 
   const [loggedIn, setLoggedIn] = useState(false);
@@ -29,7 +25,7 @@ function App() {
     try {
 
       const response = await fetch(
-        `${API_URL}/user`,
+        "http://localhost:5000/user",
         {
           credentials: "include",
         }
@@ -53,15 +49,15 @@ function App() {
   const login = () => {
 
     window.open(
-      `${API_URL}/login`,
-      "_blank"
+      "http://localhost:5000/login",
+      "_self"
     );
   };
 
   const logout = async () => {
 
     await fetch(
-      `${API_URL}/logout`,
+      "http://localhost:5000/logout",
       {
         credentials: "include",
       }
@@ -83,7 +79,7 @@ function App() {
       setLoading(true);
 
       const response = await fetch(
-        `${API_URL}/validation-rules`,
+        "http://localhost:5000/validation-rules",
         {
           credentials: "include",
         }
@@ -138,7 +134,7 @@ function App() {
     try {
 
       const response = await fetch(
-        `${API_URL}/rollback`,
+        "http://localhost:5000/rollback",
         {
           credentials: "include",
         }
@@ -169,7 +165,7 @@ function App() {
       setDeploying(true);
 
       await fetch(
-        `${API_URL}/deploy`,
+        "http://localhost:5000/deploy",
         {
           method: "POST",
 
@@ -416,3 +412,4 @@ function App() {
 }
 
 export default App;
+
